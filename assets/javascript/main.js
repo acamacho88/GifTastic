@@ -17,13 +17,19 @@ var topics = [
 ]
 
 $(document).ready(function () {
-    topics.forEach(element => {
-        var newBtn = $('<button>');
-        newBtn.attr('data-movie', element);
-        newBtn.addClass("gifbutton");
-        newBtn.text(element);
-        $('#buttons-list').append(newBtn);
-    })
+    var drawButtons = function () {
+        var btnDiv = $('#buttons-list');
+        btnDiv.html('');
+        topics.forEach(element => {
+            var newBtn = $('<button>');
+            newBtn.attr('data-movie', element);
+            newBtn.addClass("gifbutton");
+            newBtn.text(element);
+            btnDiv.append(newBtn);
+        })
+    }
+
+    drawButtons();
 
     var apiKey = 'JWs4H55JV9tJUjterOpDWk1ESMbymo34';
 
@@ -41,13 +47,18 @@ $(document).ready(function () {
         }).then(function (response) {
             var gifs = response.data;
             gifs.forEach(element => {
+                var imgDiv = $('<div>');
                 var gifImg = $('<img>');
                 gifImg.addClass('gifImg');
                 gifImg.attr('state', 'still');
                 gifImg.attr('still-url', element.images.fixed_height_still.url);
                 gifImg.attr('animate-url', element.images.fixed_height.url);
                 gifImg.attr('src', element.images.fixed_height_still.url);
-                gifDiv.append(gifImg);
+                imgDiv.append(gifImg);
+                var gifP = $('<p>');
+                gifP.text("Rating: " + element.rating);
+                imgDiv.append(gifP);
+                gifDiv.append(imgDiv);
             })
         })
     })
@@ -61,5 +72,13 @@ $(document).ready(function () {
             element.attr('state', 'still');
             element.attr('src', element.attr('still-url'));
         }
+    })
+
+    $('#submitBtn').on("click", function (event) {
+        event.preventDefault();
+        var newMovie = $('#newMovie');
+        topics.push(newMovie.val().trim());
+        drawButtons();
+        newMovie.val('');
     })
 })

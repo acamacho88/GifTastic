@@ -1,0 +1,14 @@
+#gif-display {
+    width: 70%;
+    position: absolute;
+}
+
+#gif-display div {
+    float: left;
+    margin: 5px;
+}
+
+#newBtnDiv {
+    float: right;
+    width: 30%;
+}
