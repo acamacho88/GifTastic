@@ -33,7 +33,7 @@ $(document).ready(function () {
 
     var apiKey = 'JWs4H55JV9tJUjterOpDWk1ESMbymo34';
 
-    var queryString = 'http://api.giphy.com/v1/gifs/search?api_key=' + apiKey;
+    var queryString = 'https://api.giphy.com/v1/gifs/search?api_key=' + apiKey;
 
     $(document.body).on("click", ".gifbutton", function () {
         var gifDiv = $('#gif-display');
